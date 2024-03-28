@@ -7,23 +7,27 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="基本设置1.在middleware中打开freeretos 2.将SYS的时钟源改为其他定时器，最好用基础定时器，节省资源（系统定时器SysTick被分配给Freertos） 3.将SYS的定时器的优先级拉高 USE_NEWLIB_REENTRANT这个库不使用时不要启用，会发生错误 文件介绍FreeRTOSConfig.h是用户可以修改的设置 freertos.c是用户写的文件 事件的结构体os">
+<meta name="description" content="LED设置   KEY设置（非中断）  KEY设置（中断）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1.2 CubeMx创建Freertos入门示例">
-<meta property="og:url" content="http://example.com/2024/03/12/CubeMx%E5%88%9B%E5%BB%BAFreertos%E5%85%A5%E9%97%A8%E7%A4%BA%E4%BE%8B/index.html">
+<meta property="og:title" content="电赛封装">
+<meta property="og:url" content="http://example.com/2024/03/28/%E7%94%B5%E8%B5%9B%E5%B0%81%E8%A3%85/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基本设置1.在middleware中打开freeretos 2.将SYS的时钟源改为其他定时器，最好用基础定时器，节省资源（系统定时器SysTick被分配给Freertos） 3.将SYS的定时器的优先级拉高 USE_NEWLIB_REENTRANT这个库不使用时不要启用，会发生错误 文件介绍FreeRTOSConfig.h是用户可以修改的设置 freertos.c是用户写的文件 事件的结构体os">
+<meta property="og:description" content="LED设置   KEY设置（非中断）  KEY设置（中断）">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/404.jpg">
 <meta property="og:image" content="http://example.com/img/404.jpg">
-<meta property="article:published_time" content="2024-03-12T09:20:05.000Z">
-<meta property="article:modified_time" content="2024-03-14T07:29:07.779Z">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="article:published_time" content="2024-03-28T02:15:45.000Z">
+<meta property="article:modified_time" content="2024-03-28T03:10:49.384Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/img/404.jpg">
 
 
-<title >1.2 CubeMx创建Freertos入门示例</title>
+<title >电赛封装</title>
 
 <!-- Favicon -->
 
@@ -62,7 +66,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"John Doe","root":"/","typed_text":null,"theme_version":"2.1.13","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","sticky":"TOP","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"","prefix":"The blog has been lovely to run undefined day"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-14 15:29:07"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-28 11:10:49"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.13" id="trm-switch-style">
@@ -210,7 +214,7 @@
                             NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            1.2 CubeMx创建Freertos入门示例
+                            电赛封装
                         </h1>
 
                         
@@ -300,13 +304,13 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            03/12
+            03/28
         </div>
     </div>
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-clock trm-icon"></i><br>
-            17:20
+            10:15
         </div>
     </div>
     <div class="col-sm-4">
@@ -318,30 +322,13 @@
 </div>
 <div class="trm-card ">
     <article id="article-container" class="trm-publication">
-    <h1 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h1><p>1.在middleware中打开freeretos</p>
-<p>2.将SYS的时钟源改为其他定时器，最好用基础定时器，节省资源（系统定时器SysTick被分配给Freertos）</p>
-<p>3.将SYS的定时器的优先级拉高</p>
-<h6 id="USE-NEWLIB-REENTRANT"><a href="#USE-NEWLIB-REENTRANT" class="headerlink" title="USE_NEWLIB_REENTRANT"></a>USE_NEWLIB_REENTRANT</h6><p>这个库不使用时不要启用，会发生错误</p>
-<h1 id="文件介绍"><a href="#文件介绍" class="headerlink" title="文件介绍"></a>文件介绍</h1><p>FreeRTOSConfig.h是用户可以修改的设置</p>
-<p>freertos.c是用户写的文件</p>
-<h1 id="事件的结构体"><a href="#事件的结构体" class="headerlink" title="事件的结构体"></a>事件的结构体</h1><p>osThreadId_t类型，void的类型的指针</p>
-<p>osThreadAttr_t类型，用于存储任务的参数</p>
-<ul>
-<li>name：任务名称</li>
-<li>priority：任务的优先级 </li>
-<li>stack_size：栈的大小</li>
-</ul>
-<h1 id="创建一个事件"><a href="#创建一个事件" class="headerlink" title="创建一个事件"></a>创建一个事件</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">osThreadId_t osThreadNew (osThreadFunc_t func, void *argument, const osThreadAttr_t *attr)</span><br></pre></td></tr></table></figure>
+    <h1 id="LED设置"><a href="#LED设置" class="headerlink" title="LED设置"></a>LED设置</h1><img src="D:\blog\photo\1711592939371.png" style="zoom: 50%;"  loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/>
 
-<p>第一个参数指向的要执行的任务的执行函数，第二个参数用于传递参数，第三个参数用于传递任务的参数、</p>
-<p>在cubemx中用图形化操作</p>
-<img src="D:\hexo\1.2\1710237867047.png" style="zoom:67%;"  loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/>
-
-<p>建议声明成若函数,便于调用</p>
-<p>延时函数要用osDelay（）；单位毫秒</p>
-<h1 id="编译报错"><a href="#编译报错" class="headerlink" title="编译报错"></a>编译报错</h1><p>CMakeFiles&#x2F;Demo1_1Basics.elf.dir&#x2F;Middlewares&#x2F;Third_Party&#x2F;FreeRTOS&#x2F;Source&#x2F;portable&#x2F;GCC&#x2F;ARM_CM4F&#x2F;port.c.obj</p>
-<p>解决办法是将<code>CMakeLists</code>里浮点数的注释取消后重新编译。</p>
-<p><img src="D:\hexo\1.2\dfc99f5e6fbd4a6e9137c00f0e208683.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="D:\blog\photo\1711593469995.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h1 id="KEY设置（非中断）"><a href="#KEY设置（非中断）" class="headerlink" title="KEY设置（非中断）"></a>KEY设置（非中断）</h1><p><img src="D:\blog\photo\1711594641680.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="D:\blog\photo\1711594246922.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h1 id="KEY设置（中断）"><a href="#KEY设置（中断）" class="headerlink" title="KEY设置（中断）"></a>KEY设置（中断）</h1><p><img src="D:\blog\photo\1711595123734.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="D:\blog\photo\1711595167215.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
 
 </article>
     
@@ -360,7 +347,7 @@
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2024/03/12/hexo%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" class="trm-cover-frame trm-anima-link">
+        <a href="/2024/03/12/FreeRTOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="trm-cover-frame trm-anima-link">
             
             
                 <img alt="cover" class="no-fancybox" src="/img/block.jpg">
@@ -374,14 +361,14 @@
                 </a>
             </div>
             <h5>
-                <a href="/2024/03/12/hexo%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" class="trm-anima-link">
-                    hexo命令
+                <a href="/2024/03/12/FreeRTOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="trm-anima-link">
+                    FreeRTOS学习笔记
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
             <ul class="trm-card-data trm-label">
                 <li>24/03/12</li>
-                <li>16:32</li>
+                <li>17:20</li>
                 
                 
             </ul>
